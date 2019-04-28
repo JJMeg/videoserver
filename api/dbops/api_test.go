@@ -3,6 +3,7 @@ package dbops
 import "testing"
 
 //init(dblogin,truncate tables)-> run test ->clear data(truncate tables)
+var tempvid string
 
 func cleatTables() {
 	dbConn.Exec("truncate users")
@@ -50,5 +51,43 @@ func testRegetUser(t *testing.T) {
 	pwd, err := GetUserCredential("AVE")
 	if err != nil || pwd != "" {
 		t.Errorf("Error of RegetUser: %v", err)
+	}
+}
+
+func TestVideoWorkFlow(t *testing.T) {
+	cleatTables()
+	t.Run("PrepareUser", testAddUserCredential)
+	t.Run("testAddNewVideoInfo", testAddNewVideoInfo)
+	t.Run("testGetVideoInfo", testGetVideoInfo)
+	t.Run("testDeleteVideoInfo", testDeleteVideoInfo)
+	t.Run("testRegetVideoInfo", testRegetVideoInfo)
+}
+
+func testAddNewVideoInfo(t *testing.T) {
+	vi, err := AddNewVideoInfo(1, "my-video")
+	if err != nil {
+		t.Errorf("Error of AddNewVideoInfo:%v", err)
+	}
+	tempvid = vi.Id
+}
+
+func testGetVideoInfo(t *testing.T) {
+	_, err := GetVideoInfo(tempvid)
+	if err != nil {
+		t.Errorf("Error of GetVideoInfo: %v", err)
+	}
+}
+
+func testDeleteVideoInfo(t *testing.T) {
+	err := DeleteVideoInfo(tempvid)
+	if err !=nil{
+		t.Errorf("Error of DeleteVideoInfo: %v",err)
+	}
+}
+
+func testRegetVideoInfo(t *testing.T) {
+	vi,err := GetVideoInfo(tempvid)
+	if err!=nil||vi !=nil{
+		t.Errorf("Error of RegetVideoInfo: %v",err)
 	}
 }
