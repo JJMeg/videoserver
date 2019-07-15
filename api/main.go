@@ -3,15 +3,14 @@ package main
 import (
 	"github.com/julienschmidt/httprouter"
 	"net/http"
-	"videoserver/api"
 )
 
 func RegisterHandlers() *httprouter.Router{
 	router := httprouter.New()
 	//user
-	router.POST("/user",api.CreateUser)
-	router.POST("/user/:user_name",api.Login)
-
+	router.POST("/user",CreateUser)
+	router.POST("/user/:user_name",Login)
+	//router.GET("/user/:username",);
 	//
 	return router
 }
