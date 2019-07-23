@@ -5,7 +5,7 @@ import "testing"
 //init(dblogin,truncate tables)-> run test ->clear data(truncate tables)
 var tempvid string
 
-func cleatTables() {
+func clearTables() {
 	dbConn.Exec("truncate users")
 	dbConn.Exec("truncate video_info")
 	dbConn.Exec("truncate sessions")
@@ -13,9 +13,9 @@ func cleatTables() {
 }
 
 func TestMain(m *testing.M) {
-	cleatTables()
+	clearTables()
 	m.Run()
-	cleatTables()
+	clearTables()
 }
 
 func TestUserWorkFlow(t *testing.T) {

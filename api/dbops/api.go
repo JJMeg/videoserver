@@ -9,10 +9,9 @@ import (
 	"videoserver/api/utils"
 )
 
-//
-//func openConnection() *sql.DB {//内部方法
-//	dbConn,err := sql.Open("mysql","root:rootadmin@tcp(localhost:3306)/video_server?charset=utf8")
-//	if err != nil{
+//func openConn() *sql.DB { //内部方法
+//	dbConn, err := sql.Open("mysql", "root:rootadmin@tcp(localhost:3306)/video_server?charset=utf8")
+//	if err != nil {
 //		panic(err.Error())
 //	}
 //	return dbConn
@@ -23,10 +22,12 @@ func AddUserCredential(loginName string, pwd string) error {
 	if err != nil {
 		panic(err.Error())
 	}
+
 	_, err = stmtIns.Exec(loginName, pwd)
 	if err != nil {
 		return err
 	}
+
 	defer stmtIns.Close()
 	return nil
 }
@@ -43,6 +44,7 @@ func GetUserCredential(loginName string) (string, error) {
 	if err != nil && err != sql.ErrNoRows {
 		return "", err
 	}
+
 	defer stmtOut.Close()
 	return pwd, nil
 }
@@ -60,6 +62,8 @@ func DeleteUser(loginName string, pwd string) error {
 	defer stmtDel.Close()
 	return nil
 }
+
+
 
 func AddNewVideoInfo(aid int, name string) (*defs.VideoInfo, error) {
 	//create uuid
@@ -89,6 +93,9 @@ func AddNewVideoInfo(aid int, name string) (*defs.VideoInfo, error) {
 	defer stmtIns.Close()
 	return res, nil
 }
+
+
+
 
 func GetVideoInfo(vid string) (*defs.VideoInfo, error) {
 	stmtOut, err := dbConn.Prepare(`SELECT author_id,name,display_ctime FROM video_info WHERE Id = ?`)
@@ -129,6 +136,8 @@ func DeleteVideoInfo(vid string) error {
 	defer stmtDel.Close()
 	return nil
 }
+
+
 
 func AddNewComments(vid string, aid int, content string) error {
 	id, err := utils.NewUUID()
@@ -178,6 +187,6 @@ func ListComments(vid string, from, to int) ([]*defs.Comment, error) {
 	}
 
 	defer stmtOut.Close()
-	return res,nil
+	return res, nil
 
 }
