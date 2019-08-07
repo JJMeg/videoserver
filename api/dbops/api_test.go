@@ -22,6 +22,7 @@ func TestUserWorkFlow(t *testing.T) {
 	t.Run("testAddUserCredential", testAddUserCredential)
 	t.Run("testGetUserCredential", testGetUserCredential)
 	t.Run("testDeleteUser", testDeleteUser)
+	t.Run("testRegetUser",testRegetUser)
 }
 
 func testAddUserCredential(t *testing.T) {
@@ -55,7 +56,7 @@ func testRegetUser(t *testing.T) {
 }
 
 func TestVideoWorkFlow(t *testing.T) {
-	cleatTables()
+	clearTables()
 	t.Run("PrepareUser", testAddUserCredential)
 	t.Run("testAddNewVideoInfo", testAddNewVideoInfo)
 	t.Run("testGetVideoInfo", testGetVideoInfo)
@@ -64,7 +65,7 @@ func TestVideoWorkFlow(t *testing.T) {
 }
 
 func testAddNewVideoInfo(t *testing.T) {
-	vi, err := AddNewVideoInfo(1, "my-video")
+	vi, err := AddNewVideo(1, "my-video")
 	if err != nil {
 		t.Errorf("Error of AddNewVideoInfo:%v", err)
 	}

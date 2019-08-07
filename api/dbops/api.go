@@ -10,6 +10,7 @@ import (
 )
 
 //func openConn() *sql.DB { //内部方法
+// Open时未真正连接，Prepare时才真正连接
 //	dbConn, err := sql.Open("mysql", "root:rootadmin@tcp(localhost:3306)/video_server?charset=utf8")
 //	if err != nil {
 //		panic(err.Error())
@@ -65,7 +66,7 @@ func DeleteUser(loginName string, pwd string) error {
 
 
 
-func AddNewVideoInfo(aid int, name string) (*defs.VideoInfo, error) {
+func AddNewVideo(aid int, name string) (*defs.VideoInfo, error) {
 	//create uuid
 	vid, err := utils.NewUUID()
 	if err != nil {
