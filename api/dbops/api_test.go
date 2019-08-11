@@ -22,7 +22,7 @@ func TestUserWorkFlow(t *testing.T) {
 	t.Run("testAddUserCredential", testAddUserCredential)
 	t.Run("testGetUserCredential", testGetUserCredential)
 	t.Run("testDeleteUser", testDeleteUser)
-	t.Run("testRegetUser",testRegetUser)
+	t.Run("testRegetUser", testRegetUser)
 }
 
 func testAddUserCredential(t *testing.T) {
@@ -81,14 +81,14 @@ func testGetVideoInfo(t *testing.T) {
 
 func testDeleteVideoInfo(t *testing.T) {
 	err := DeleteVideoInfo(tempvid)
-	if err !=nil{
-		t.Errorf("Error of DeleteVideoInfo: %v",err)
+	if err != nil {
+		t.Errorf("Error of DeleteVideoInfo: %v", err)
 	}
 }
 
 func testRegetVideoInfo(t *testing.T) {
-	vi,err := GetVideoInfo(tempvid)
-	if err!=nil||vi !=nil{
-		t.Errorf("Error of RegetVideoInfo: %v",err)
+	vi, err := GetVideoInfo(tempvid)
+	if err != nil || vi != nil {
+		t.Errorf("Error of RegetVideoInfo: %v", err)
 	}
 }

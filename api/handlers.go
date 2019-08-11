@@ -7,15 +7,15 @@ import (
 )
 
 func CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	io.WriteString(w,"Create User Handler")
+	io.WriteString(w, "Create User Handler")
 }
 
-func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params)  {
+func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	uname := p.ByName("user_name")
-	io.WriteString(w,uname)
+	io.WriteString(w, uname)
 }
 
-func GetUser(w http.ResponseWriter, r *http.Request, p httprouter.Params)  {
+func GetUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	uname := p.ByName("user_name")
-	io.WriteString(w,uname)
+	io.WriteString(w, uname)
 }
