@@ -7,15 +7,20 @@ type UserCredential struct {
 
 //Data model
 type VideoInfo struct {
-	Id string
-	AuthorId int
-	Name string
+	Id           string
+	AuthorId     int
+	Name         string
 	DisplayCtime string
 }
 
 type Comment struct {
-	Id string
+	Id      string
 	VideoId string
-	Author string
+	Author  string
 	Content string
+}
+
+type SimpleSession struct {
+	Username string
+	TTL      int64
 }
