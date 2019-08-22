@@ -1,7 +1,9 @@
 package dbops
 
 import (
+	"log"
 	"strconv"
+	"sync"
 	"videoserver/api/defs"
 )
 
@@ -43,4 +45,54 @@ func RetrieveSession(sid string) (*defs.SimpleSession, error) {
 
 	defer stmtOut.Close()
 	return ss, nil
+}
+
+func RetreiveAllSessions() (*sync.Map, error) {
+	m := &sync.Map{}
+	stmtOut, err := dbConn.Prepare("SELECT * FROM seesions")
+	if err != nil {
+		return nil, err
+	}
+
+	rows, err := stmtOut.Query()
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var id string
+		var ttlstr string
+		var login_name string
+
+		if er := rows.Scan(&id, &ttlstr, &login_name); er != nil {
+			break
+		}
+
+		if ttl, err := strconv.ParseInt(ttlstr, 10, 64); err == nil {
+			ss := &defs.SimpleSession{
+				TTL:      ttl,
+				Username: login_name,
+			}
+
+			m.Store(id, ss)
+		}
+	}
+
+	defer stmtOut.Close()
+	return m, nil
+}
+
+func DeleteSession(sid string) error {
+	stmtOut, err := dbConn.Prepare("DELETE FROM sessions WHERE session_id = (?)")
+	if err != nil {
+		log.Printf("%s", err)
+		return err
+	}
+
+	if _, err = stmtOut.Exec(sid); err != nil {
+		return err
+	}
+
+	defer stmtOut.Close()
+	return nil
 }
