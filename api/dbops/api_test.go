@@ -125,7 +125,7 @@ func testListComments(t *testing.T) {
 		t.Errorf("Errorf of List Comments: %v", err)
 	}
 
-	for i,ele :=range res{
-		fmt.Printf("comment: %d, %v\n",i,ele)
-	}
+	for i, ele := range res {
+		fmt.Printf("comment: %d, %v\n", i, ele)
+
 }
