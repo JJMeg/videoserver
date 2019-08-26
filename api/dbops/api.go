@@ -2,11 +2,12 @@ package dbops
 
 import (
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"time"
 	"videoserver/api/defs"
 	"videoserver/api/utils"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 //func openConn() *sql.DB { //内部方法
@@ -64,8 +65,6 @@ func DeleteUser(loginName string, pwd string) error {
 	return nil
 }
 
-
-
 func AddNewVideo(aid int, name string) (*defs.VideoInfo, error) {
 	//create uuid
 	vid, err := utils.NewUUID()
@@ -94,9 +93,6 @@ func AddNewVideo(aid int, name string) (*defs.VideoInfo, error) {
 	defer stmtIns.Close()
 	return res, nil
 }
-
-
-
 
 func GetVideoInfo(vid string) (*defs.VideoInfo, error) {
 	stmtOut, err := dbConn.Prepare(`SELECT author_id,name,display_ctime FROM video_info WHERE Id = ?`)
@@ -137,8 +133,6 @@ func DeleteVideoInfo(vid string) error {
 	defer stmtDel.Close()
 	return nil
 }
-
-
 
 func AddNewComments(vid string, aid int, content string) error {
 	id, err := utils.NewUUID()

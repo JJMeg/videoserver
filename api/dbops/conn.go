@@ -2,14 +2,14 @@ package dbops
 
 import "database/sql"
 
-var(
+var (
 	dbConn *sql.DB
-	err error
+	err    error
 )
 
-func init()  {
-	dbConn,err = sql.Open("mysql","root:rootadmin@tcp(localhost:3306)/video_server?charset=utf8")
-	if err != nil{
+func init() {
+	dbConn, err = sql.Open("mysql", "root:rootadmin@tcp(localhost:3306)/video_server?charset=utf8")
+	if err != nil {
 		panic(err.Error())
 	}
 }
