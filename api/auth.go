@@ -25,14 +25,13 @@ func validateUserSession(r *http.Request) bool {
 	return true
 }
 
-func ValidateUser(w http.ResponseWriter,r *http.Request) bool {
+func ValidateUser(w http.ResponseWriter, r *http.Request) bool {
 	uname := r.Header.Get(HEADER_FIELD_UNAME)
-	if len(uname) == 0{
+	if len(uname) == 0 {
 		w.Write([]byte("uname error"))
 		//sendErrorResponse(w)
 		return false
 	}
-
 
 	return true
 }

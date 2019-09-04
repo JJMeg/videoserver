@@ -27,3 +27,8 @@ func (cl *ConnLimiter) GetConn() bool {
 	cl.bucket <- 1
 	return true
 }
+
+func (cl *ConnLimiter) ReleaseConn() {
+	c := <-cl.bucket
+	log.Printf("New connection coming: %s", c)
+}
