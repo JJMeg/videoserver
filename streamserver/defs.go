@@ -1,5 +1,5 @@
 package main
 
 const (
-	VIDEO_DIR = "./videos"
+	VIDEO_DIR = "./videos/"
 )
