@@ -1,10 +1,3 @@
-module github.com/JJMeg/videoserver
+module videoserver
 
-go 1.11.5
-
-require (
-	github.com/Shopify/sarama v1.23.1
-	github.com/go-sql-driver/mysql v1.4.1
-	github.com/julienschmidt/httprouter v1.2.0
-	github.com/pkg/errors v0.8.1
-)
+require github.com/julienschmidt/httprouter v1.2.0
